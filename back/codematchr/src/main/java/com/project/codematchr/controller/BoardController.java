@@ -2,6 +2,7 @@ package com.project.codematchr.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.codematchr.dto.request.PostBoardRequestDto;
 import com.project.codematchr.dto.response.GetBoardResponseDto;
+import com.project.codematchr.dto.response.GetTop3CurrentListResponseDto;
 import com.project.codematchr.dto.response.PostBoardResponseDto;
 import com.project.codematchr.service.BoardService;
 
@@ -24,15 +26,16 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/board")
 @RequiredArgsConstructor
 public class BoardController {
-
+    
     private final BoardService boardService;
 
     // API : 게시물 작성 메서드 //
     @PostMapping("")
     public ResponseEntity<? super PostBoardResponseDto> postBoard(
+        String writerEmail,
         @RequestBody @Valid PostBoardRequestDto requestBody
     ){
-        ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard();
+        ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard(writerEmail, requestBody);
         return response;
     }
 
@@ -96,9 +99,10 @@ public class BoardController {
     
     // API : TOP3 게시물 최신순 리스트 조회 메서드 //
     //? Mapping 주소 다시 확인하고 정리해야함 //
-    @GetMapping("/top-3/current")
-    public ResponseEntity<?> getTop3CurrentList(){
-        return null;
+    @GetMapping("/top-3")
+    public ResponseEntity<? super GetTop3CurrentListResponseDto> getTop3Current(){
+        ResponseEntity<? super GetTop3CurrentListResponseDto> response = boardService.getTop3Current();
+        return response;
     }
 
     // API : TOP3 게시물 댓글순 리스트 조회 메서드 //

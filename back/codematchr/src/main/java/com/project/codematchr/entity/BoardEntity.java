@@ -1,5 +1,9 @@
 package com.project.codematchr.entity;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,10 +35,16 @@ public class BoardEntity {
     private String boardWriteDatetime; 
     private String boardWriterEmail;
 
-    public BoardEntity(PostBoardRequestDto dto) {
+    public BoardEntity(String boardWriterEmail, PostBoardRequestDto dto) {
+        Date now = Date.from(Instant.now());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String writeDatetime = simpleDateFormat.format(now);
+
         this.boardTitle = dto.getBoardTitle();
         this.boardContents = dto.getBoardContents();
         this.boardImageUrl = dto.getBoardImageUrl();
+        this.boardWriteDatetime = writeDatetime;
+        this.boardWriterEmail = boardWriterEmail;
     }
 
 

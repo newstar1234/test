@@ -10,8 +10,7 @@ public interface BoardListResultSet {
     int getBoardCommentCount();
     int getBoardFavoriteCount();
     String getBoardWriteDatetime();
-    String getBoardWriterEmail();
-    String getUserNickname();
     String getUserProfileImageUrl();
+    String getUserNickname();
 
 }

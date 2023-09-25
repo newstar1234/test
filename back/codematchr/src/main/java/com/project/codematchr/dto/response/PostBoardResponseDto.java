@@ -24,4 +24,8 @@ public class PostBoardResponseDto extends ResponseDto {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    public static ResponseEntity<ResponseDto> noExistedUserEmail() {
+        ResponseDto result = new ResponseDto(ResponseCode.NO_EXSITED_USER_EMAIL, ResponseMessage.NO_EXSITED_USER_EMAIL);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+      }
 }
