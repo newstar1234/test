@@ -4,7 +4,7 @@ public interface ResponseCode {
     String SUCCESS = "SU";
 
     String SIGN_IN_FAIL = "SF";
-    String REQUEST_PARAMETER_VALIDATION_FAILED = "VF";
+    String REQUEST_PARAMETER_VALIDATION_FAILED = "RF";
     String AUTHENTICATION_FAIL = "AF";
 
     String EXISTED_USER_EMAIL = "EE";

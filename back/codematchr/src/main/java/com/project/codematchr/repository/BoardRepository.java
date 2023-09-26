@@ -11,6 +11,9 @@ import com.project.codematchr.entity.resultSet.BoardListResultSet;
 
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
+
+
+    BoardEntity findByBoardNumber(Integer boardNumber);
     
     @Query(
         value = 

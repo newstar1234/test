@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.project.codematchr.dto.request.PatchBoardRequestDto;
 import com.project.codematchr.dto.request.PostBoardRequestDto;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +36,7 @@ public class BoardEntity {
     private String boardWriteDatetime; 
     private String boardWriterEmail;
 
-    public BoardEntity(String boardWriterEmail, PostBoardRequestDto dto) {
+    public BoardEntity(PostBoardRequestDto dto) {
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String writeDatetime = simpleDateFormat.format(now);
@@ -44,7 +45,11 @@ public class BoardEntity {
         this.boardContents = dto.getBoardContents();
         this.boardImageUrl = dto.getBoardImageUrl();
         this.boardWriteDatetime = writeDatetime;
-        this.boardWriterEmail = boardWriterEmail;
+    }
+    public void patch(PatchBoardRequestDto dto) {
+        this.boardTitle = dto.getBoardTitle();
+        this.boardContents = dto.getBoardContents();
+        this.boardImageUrl = dto.getBoardImageUrl();
     }
 
 

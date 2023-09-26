@@ -3,6 +3,12 @@ package com.project.codematchr.dto.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.project.codematchr.common.response.ResponseCode;
+import com.project.codematchr.common.response.ResponseMessage;
+import com.project.codematchr.dto.ResponseDto;
 import com.project.codematchr.entity.BoardViewEntity;
 
 import lombok.AllArgsConstructor;
@@ -46,4 +52,13 @@ public class BoardListResponseDto {
     return boardList;
   }
 
+  public static ResponseEntity<ResponseDto> noExsitedUserEmail() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXSITED_USER_EMAIL, ResponseMessage.NO_EXSITED_USER_EMAIL);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);  
+  }
+
+  public static ResponseEntity<ResponseDto> noExsitedBoardNumber() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_BOARD_NUMBER, ResponseMessage.NO_EXISTED_BOARD_NUMBER);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);  
+  }
 }
