@@ -8,6 +8,7 @@ import com.project.codematchr.dto.request.PatchBoardRequestDto;
 import com.project.codematchr.dto.request.PostBoardRequestDto;
 import com.project.codematchr.dto.response.DeleteBoardResponseDto;
 import com.project.codematchr.dto.response.GetBoardResponseDto;
+import com.project.codematchr.dto.response.GetCommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CurrentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3FavoriteListResponseDto;
@@ -43,7 +44,7 @@ public interface BoardService {
     // method : 특정 유저의 게시물 리스트 조회 메서드 //
     ResponseEntity<? super GetUserListResponseDto> getUserBoardList(String writerEmail);
     // method : 특정 게시물의 댓글 리스트 조회 메서드 //
-    ResponseEntity<?> getCommentList();
+    ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer commentBoardNumber);
     // method : 특정 게시물의 좋아요 리스트 조회 메서드 //
     ResponseEntity<?> getFavoriteList();
     // method : 검색 게시물 리스트 조회 메서드 //

@@ -17,6 +17,7 @@ import com.project.codematchr.dto.request.PatchBoardRequestDto;
 import com.project.codematchr.dto.request.PostBoardRequestDto;
 import com.project.codematchr.dto.response.DeleteBoardResponseDto;
 import com.project.codematchr.dto.response.GetBoardResponseDto;
+import com.project.codematchr.dto.response.GetCommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CurrentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3FavoriteListResponseDto;
@@ -97,9 +98,12 @@ public class BoardController {
     }
 
     // API : 특정 게시물의 댓글 리스트 조회 메서드 //
-    @GetMapping("/{boardNumber}/comment-list")
-    public ResponseEntity<?> getCommentList(){
-        return null;
+    @GetMapping("/{commentBoardNumber}/comment-list")
+    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
+        @PathVariable Integer commentBoardNumber
+    ){
+        ResponseEntity<? super GetCommentListResponseDto> response = boardService.getCommentList(commentBoardNumber);
+        return response;
     }
 
     // API : 특정 게시물의 좋아요 리스트 조회 메서드 //

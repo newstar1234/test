@@ -9,8 +9,10 @@ import com.project.codematchr.dto.ResponseDto;
 import com.project.codematchr.dto.request.PatchBoardRequestDto;
 import com.project.codematchr.dto.request.PostBoardRequestDto;
 import com.project.codematchr.dto.response.BoardListResponseDto;
+import com.project.codematchr.dto.response.CommentListResponseDto;
 import com.project.codematchr.dto.response.DeleteBoardResponseDto;
 import com.project.codematchr.dto.response.GetBoardResponseDto;
+import com.project.codematchr.dto.response.GetCommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CommentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3CurrentListResponseDto;
 import com.project.codematchr.dto.response.GetTop3FavoriteListResponseDto;
@@ -19,8 +21,10 @@ import com.project.codematchr.dto.response.PatchBoardResponseDto;
 import com.project.codematchr.dto.response.PostBoardResponseDto;
 import com.project.codematchr.entity.BoardEntity;
 import com.project.codematchr.entity.BoardViewEntity;
+import com.project.codematchr.entity.resultSet.CommentListResultSet;
 import com.project.codematchr.repository.BoardRepository;
 import com.project.codematchr.repository.BoardViewRepository;
+import com.project.codematchr.repository.CommentRepository;
 import com.project.codematchr.repository.UserRepository;
 import com.project.codematchr.service.BoardService;
 
@@ -33,6 +37,7 @@ public class BoardServiceImplement implements BoardService {
     private final BoardRepository boardRepository;
     private final BoardViewRepository boardViewRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
 // description : 게시물 작성 //
 @Override
@@ -224,10 +229,26 @@ public ResponseEntity<? super PatchBoardResponseDto> patchBoard(Integer boardNum
 
 // description : 특정 게시물 댓글 리스트 조회 //
     @Override
-    public ResponseEntity<?> getCommentList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCommentList'");
+    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer commentBoardNumber) {
+
+        List<CommentListResponseDto> commentList = null;
+
+        try {
+            // description : 게시물의 댓글 리스트 조회 //
+            List<CommentListResultSet> resultSets = commentRepository.getCommentList(commentBoardNumber);
+            
+            // description : resultSet을 dto로 변환 //
+            commentList = CommentListResponseDto.copyList(resultSets);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetCommentListResponseDto.success(commentList);
+
+
     }
+
 // description : 특정 게시물 좋아요 리스트 조회 //
     @Override
     public ResponseEntity<?> getFavoriteList() {
